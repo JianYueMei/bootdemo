@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService{
 //        } catch(ArithmeticException e){
 //            logger.info("roleService报错");
 //        }
-        int i=1/0;
+//        int i=1/0;
         jmsMessagingTemplate.convertAndSend(userQueue,user1);
         return user1;
     }
