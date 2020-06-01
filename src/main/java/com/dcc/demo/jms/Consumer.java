@@ -1,6 +1,8 @@
 package com.dcc.demo.jms;
 
 import com.dcc.demo.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class Consumer {
+    private final static Logger logger = LoggerFactory .getLogger(Consumer.class);
+
 
     private volatile Map  map = new ConcurrentHashMap();
     //接收queue类型消息
@@ -36,6 +40,17 @@ public class Consumer {
     public void ListenUserQueue(User user){
         System.out.println("User队列接收到queue消息：" + user.toString());
     }
+
+//    @JmsListener(destination = "dcc.user.queue", containerFactory = "jmsListener")
+//    public void receiveQueue(final TextMessage text, Session session)
+//            throws JMSException {
+//        try {
+//            logger.debug("Consumer user队列 收到的报文为:" + text.getText());
+//            text.acknowledge();// 使用手动签收模式，需要手动的调用，如果不在catch中调用session.recover()消息只会在重启服务后重发
+//        } catch (Exception e) {
+//            session.recover();// 此不可省略 重发信息使用
+//        }
+//    }
 
     //接收topic类型消息
     //destination对应配置类中ActiveMQTopic("springboot.topic")设置的名字

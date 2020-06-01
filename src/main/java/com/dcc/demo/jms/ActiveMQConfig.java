@@ -20,6 +20,8 @@ import org.springframework.messaging.converter.SimpleMessageConverter;
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 import javax.jms.Topic;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @EnableJms
@@ -44,7 +46,13 @@ public class ActiveMQConfig {
     public ActiveMQConnectionFactory factory(@Value("${spring.activemq.broker-url}")String url, RedeliveryPolicy redeliveryPolicy){
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("admin", "admin", url);
         factory.setRedeliveryPolicy(redeliveryPolicy);
-        factory.setTrustAllPackages(true);
+        // 设置信任序列化包集合
+        List<String> models = new ArrayList<>();
+        models.add("java.lang");
+        models.add("java.util");
+        models.add("com.dcc.demo");
+        factory.setTrustedPackages(models);
+//        factory.setTrustAllPackages(true); //信任所有包
         return factory;
     }
 
