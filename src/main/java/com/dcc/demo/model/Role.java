@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 @Entity(name="t_role")
 public class Role implements Serializable {
+
+
     @Id
     @GeneratedValue
     private Long id;
