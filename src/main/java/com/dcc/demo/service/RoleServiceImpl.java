@@ -3,6 +3,7 @@ package com.dcc.demo.service;
 import com.dcc.demo.model.Role;
 import com.dcc.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

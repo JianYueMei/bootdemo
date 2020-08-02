@@ -68,12 +68,12 @@ public class UserServiceImpl implements UserService{
     public User addUser(User user){
         User user1 = userRepository.save(user);
 //        try {
-            roleService.addRole(new Role("admin3","管理员3"));
+//            roleService.addRole(new Role("role1","法务"));
 //        } catch(ArithmeticException e){
 //            logger.info("roleService报错");
 //        }
 //        int i=1/0;
-        jmsMessagingTemplate.convertAndSend(userQueue,user1);
+//        jmsMessagingTemplate.convertAndSend(userQueue,user1);
         return user1;
     }
 }
