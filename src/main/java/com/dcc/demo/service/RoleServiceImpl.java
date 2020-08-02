@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.dcc.demo.model.Role;
 import com.dcc.demo.redis.RedisUtil;
 import com.dcc.demo.repository.RoleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class RoleServiceImpl implements RoleService{
+    private final Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
+
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -24,6 +29,12 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public List<Role> getAllRoles() {
+        if (redisUtil.hasKey("search_list")) {
+            logger.info("===存在list");
+        } else {
+            redisUtil.set("search_list","search_list_ing");
+            redisUtil.expire("search_list",10, TimeUnit.SECONDS);
+        }
         if(redisUtil.hasKey("role_all")){
             Map<Object,Object> map = redisUtil.hGetAll("role_all");
             List<Role> roleList = new ArrayList<>();
