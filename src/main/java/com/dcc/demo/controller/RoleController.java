@@ -24,4 +24,14 @@ public class RoleController {
     public List<Role> getAllUsers(){
         return roleService.getAllRoles();
     }
+
+    @RequestMapping("/getAllRolesFromhash")
+    public List<Role> getAllRolesFromhash(){
+        return roleService.getAllRolesFromHash();
+    }
+
+    @RequestMapping("/getRoleById")
+    public Role getRoleById(Long id){
+        return roleService.getRoleById(id);
+    }
 }
