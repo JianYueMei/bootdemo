@@ -73,9 +73,6 @@ public class RoleServiceImpl implements RoleService{
         return role;
     }
 
-    private void syncRole(Role role){
-        redisUtil.hPut("role_all",JSON.toJSONString(role.getId()),JSON.toJSONString(role));
-    }
 
     public Integer syncAllRoles(){
         Integer resu = 0;
@@ -95,4 +92,10 @@ public class RoleServiceImpl implements RoleService{
         }
         return resu;
     }
+
+
+    private void syncRole(Role role) {
+        redisUtil.hPut("role_all",JSON.toJSONString(role.getId()),JSON.toJSONString(role));
+    }
+
 }
