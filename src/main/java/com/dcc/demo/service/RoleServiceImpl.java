@@ -98,4 +98,6 @@ public class RoleServiceImpl implements RoleService{
         redisUtil.hPut("role_all",JSON.toJSONString(role.getId()),JSON.toJSONString(role));
     }
 
+
+
 }

@@ -33,6 +33,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> getAllUsers() {
+        try {
+            Thread.currentThread().sleep(60000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userRepository.findAll();
     }
 
