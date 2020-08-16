@@ -14,7 +14,7 @@ public class ScheduledTasks {
     @Autowired
     private RoleService roleService;
 
-    @Scheduled(cron = "0 0/5 * * * ?") // 在每5分钟触发
+    @Scheduled(cron = "0 0/1 * * * ?") // 在每5分钟触发
     public void syncAllRoles() {
         roleService.syncAllRoles();
         logger.info("我执行了");
